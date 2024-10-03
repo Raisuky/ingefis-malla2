@@ -138,12 +138,12 @@ const Curriculum: React.FC = () => {
       : 'bg-gray-50 dark:bg-gray-700'; // Gris suave por defecto (modo claro), intenso en modo oscuro
 
     const hoverClass = isApproved
-      ? 'hover:bg-green-100 dark:hover:bg-green-600'
+      ? 'hover:bg-green-200 dark:hover:bg-green-700'  // Darker green
       : isUnlocked
-      ? 'hover:bg-blue-100 dark:hover:bg-blue-600'
+      ? 'hover:bg-blue-200 dark:hover:bg-blue-700'    // Darker blue
       : isLocked
-      ? 'hover:bg-red-100 dark:hover:bg-red-600'
-      : 'hover:bg-gray-100 dark:hover:bg-gray-600';
+      ? 'hover:bg-red-200 dark:hover:bg-red-700'      // Darker red
+      : 'hover:bg-gray-200 dark:hover:bg-gray-700';   // Darker gray
 
     return (
       <div
@@ -244,7 +244,7 @@ const Curriculum: React.FC = () => {
       {/* Footer con créditos */}
       <div className="text-center mt-8">
         <p className="text-sm font-semibold">
-          Creado por Joaquín Riquelme, 2024
+          Made by <a href="https://github.com/Raisuky/" target="_blank" rel="noopener noreferrer">Raisuky</a>, 2024
         </p>
       </div>
     </div>
