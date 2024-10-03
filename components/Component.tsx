@@ -171,7 +171,7 @@ const Curriculum: React.FC = () => {
     return (
       <div
         key={subject.code}
-        className={`${backgroundClass} ${hoverClass} p-4 rounded-lg shadow-md cursor-pointer transition-transform ${isSelected ? 'border-4 border-blue-400' : ''}`}
+        className={'${backgroundClass} ${hoverClass} p-4 rounded-lg shadow-md cursor-pointer transition-transform ${isSelected ? 'border-4 border-blue-400' : ''}'}
         onClick={() => handleSelectSubject(subject.code)} // Seleccionar asignatura para generar horario
         onDoubleClick={() => handleApproveSubject(subject.code)} // Doble clic para marcar aprobada
         onContextMenu={(e) => { // Click derecho para marcar en curso
@@ -179,9 +179,7 @@ const Curriculum: React.FC = () => {
           handleInProgressSubject(subject.code);
         }}
       >
-        <h3 className="font-semibold text-lg">{subject.name}</h3>
-        <p className="text-sm">Código: {subject.code}</p>
-        <p className="text-sm">Horas por semana: {subject.hours}</p>
+        <><h3 className="font-semibold text-lg">{subject.name}</h3><p className="text-sm">Código: {subject.code}</p><p className="text-sm">Horas por semana: {subject.hours}</p></>
       </div>
     );
   };
@@ -199,7 +197,7 @@ const Curriculum: React.FC = () => {
   };
 
   return (
-    <div className={`container mx-auto px-4 py-8 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-black'}`}>
+    <div className={'container mx-auto px-4 py-8 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-black'}'}>
       <h1 className="text-4xl font-bold mb-8 text-center">Malla Curricular</h1>
 
       {/* Descripción de uso */}
@@ -252,7 +250,7 @@ const Curriculum: React.FC = () => {
         <div className="w-full bg-gray-300 rounded-full h-4">
           <div
             className="bg-blue-600 h-4 rounded-full"
-            style={{ width: `${progressPercentage}%` }}
+            style={{ width: '${progressPercentage}%' }}
           ></div>
         </div>
       </div>
