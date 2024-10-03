@@ -8,20 +8,20 @@ interface Subject {
   semester: number;
   description: string;
   prerequisites?: string[];
-  hours: number; // Número de horas por semana
+  hours: number;
 }
 
+// Todas las asignaturas con los semestres correctos y relaciones de prerrequisitos
 const subjects: Subject[] = [
-  { code: "25001", name: "Introducción a la Física", semester: 1, description: "Fundamentos básicos de la física", prerequisites: [], hours: 6 }, // Anual
+  { code: "25001", name: "Introducción a la Física", semester: 1, description: "Fundamentos básicos de la física", prerequisites: [], hours: 4 }, // Anual
   { code: "25002", name: "Cálculo", semester: 1, description: "Cálculo básico e integral", prerequisites: [], hours: 6 }, // Anual
-  { code: "25003", name: "Álgebra", semester: 1, description: "Estructuras algebraicas fundamentales", prerequisites: [], hours: 6 }, // Anual
+  { code: "25003", name: "Álgebra", semester: 1, description: "Estructuras algebraicas fundamentales", prerequisites: [], hours: 5 }, // Anual
   { code: "25053", name: "Física Experimental I", semester: 1, description: "Laboratorio introductorio de física", prerequisites: [], hours: 4 }, // Anual
   { code: "25007", name: "Electromagnetismo I", semester: 3, description: "Conceptos fundamentales del electromagnetismo", prerequisites: ["25001"], hours: 5 },
   { code: "25008", name: "Cálculo Avanzado", semester: 3, description: "Conceptos avanzados de cálculo", prerequisites: ["25002"], hours: 6 },
   { code: "25010", name: "Ecuaciones Diferenciales", semester: 3, description: "Métodos de resolución de ecuaciones diferenciales", prerequisites: ["25002", "25003"], hours: 5 },
   { code: "25012", name: "Electromagnetismo II", semester: 4, description: "Conceptos avanzados de electromagnetismo", prerequisites: ["25007", "25008"], hours: 5 },
   { code: "25013", name: "Métodos Matemáticos para la Física I", semester: 4, description: "Métodos matemáticos aplicados a la física", prerequisites: ["25008", "25010"], hours: 4 },
-  { code: "25015", name: "Mecánica clásica", semester: 4, description: "Introducción a la dinámica de forma diferencial", prerequisites: ["25053"], hours: 6},
   { code: "25014", name: "Electrónica", semester: 4, description: "Introducción a la electrónica", prerequisites: ["25007"], hours: 4 },
   { code: "25016", name: "Óptica", semester: 5, description: "Fundamentos de la óptica", prerequisites: ["25007"], hours: 4 },
   { code: "25017", name: "Métodos Matemáticos para la Física II", semester: 5, description: "Métodos avanzados matemáticos", prerequisites: ["25013"], hours: 4 },
@@ -50,10 +50,9 @@ const subjects: Subject[] = [
   
   // Métodos Computacionales
   { code: "25054", name: "Métodos Computacionales para la Física I", semester: 2, description: "Introducción a los métodos computacionales", prerequisites: [], hours: 4 },
-  { code: "25055", name: "Métodos Computacionales para la Física II", semester: 3, description: "Métodos computacionales avanzados", prerequisites: ["25054"], hours: 4 },
-  { code: "25056", name: "Métodos Computacionales y Estadísticos III", semester: 4, description: "Métodos computacionales y estadísticos avanzados", prerequisites: ["25055"], hours: 4 },
+  { code: "25055", name: "Métodos Computacionales para la Física II", semester: 6, description: "Métodos computacionales avanzados", prerequisites: ["25054"], hours: 4 },
+  { code: "25056", name: "Métodos Computacionales y Estadísticos III", semester: 7, description: "Métodos computacionales y estadísticos avanzados", prerequisites: ["25055"], hours: 4 },
 ];
-
 
 const LOCAL_STORAGE_KEY = 'approvedSubjects';
 
@@ -64,8 +63,8 @@ const Curriculum: React.FC = () => {
   const [currentSemester, setCurrentSemester] = useState<number | null>(null); // Semestre seleccionado
   const [searchQuery, setSearchQuery] = useState(''); // Para la búsqueda
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false); // Modo oscuro
-  const [showSchedule, setShowSchedule] = useState<boolean>(false); // Mostrar recomendaciones de horario
 
+  // Cargar asignaturas aprobadas desde localStorage al iniciar
   useEffect(() => {
     const storedApprovedSubjects = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (storedApprovedSubjects) {
@@ -76,6 +75,7 @@ const Curriculum: React.FC = () => {
     setSemesters(uniqueSemesters.sort((a, b) => a - b));
   }, []);
 
+  // Guardar las asignaturas aprobadas en localStorage cada vez que cambien
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(approvedSubjects));
   }, [approvedSubjects]);
@@ -98,16 +98,6 @@ const Curriculum: React.FC = () => {
     }
   };
 
-  // Generar recomendaciones de horario
-  const generateSchedule = () => {
-    const selected = subjects.filter(subject => selectedSubjects.includes(subject.code));
-    let totalHours = 0;
-    selected.forEach(sub => {
-      totalHours += sub.hours;
-    });
-    return { subjects: selected, totalHours };
-  };
-
   // Alternar entre modo claro y oscuro
   const toggleDarkMode = () => {
     setIsDarkMode(prevMode => !prevMode);
@@ -126,6 +116,7 @@ const Curriculum: React.FC = () => {
     return matchesSearch && matchesSemester;
   });
 
+  // Renderizar una asignatura (nodo visual)
   const createNode = (subject: Subject) => {
     const isApproved = approvedSubjects.includes(subject.code);
     const isUnlocked = subject.prerequisites && subject.prerequisites.every(prereq => approvedSubjects.includes(prereq));
@@ -154,6 +145,7 @@ const Curriculum: React.FC = () => {
     );
   };
 
+  // Renderizado de los semestres
   const renderSemester = (semester: number) => {
     const semesterSubjects = filteredSubjects.filter(subject => subject.semester === semester);
     return (
@@ -168,12 +160,22 @@ const Curriculum: React.FC = () => {
 
   return (
     <div className={`container mx-auto px-4 py-8 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-black'}`}>
-      <h1 className="text-4xl font-bold mb-8 text-center">Malla interactiva Ingeniería Física</h1>
-      <div className="text-center mt-8">
-        <p className="text-sm font-semibold">
-          Creado por Joaquín Riquelme, 2024
+      <h1 className="text-4xl font-bold mb-8 text-center">Malla Curricular</h1>
+
+      {/* Descripción de uso */}
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold mb-2">¿Cómo usar esta malla curricular?</h2>
+        <p className="text-sm">
+          Esta malla curricular interactiva te permite gestionar tu progreso académico.
+          <ul className="list-disc pl-6 mt-2">
+            <li><strong>Hacer clic en una asignatura</strong> para seleccionarla como en curso.</li>
+            <li><strong>Hacer doble clic en una asignatura</strong> para marcarla como aprobada.</li>
+            <li>Las asignaturas bloqueadas (en rojo) tienen prerrequisitos no cumplidos.</li>
+            <li>Las asignaturas aprobadas (en verde) se marcarán automáticamente.</li>
+          </ul>
         </p>
       </div>
+
       {/* Barra de búsqueda */}
       <div className="mb-4">
         <input
@@ -226,28 +228,12 @@ const Curriculum: React.FC = () => {
       {/* Renderizado de los semestres */}
       {semesters.map(renderSemester)}
 
-      {/* Botón para generar horario */}
-      <div className="mb-8">
-        <button
-          onClick={() => setShowSchedule(true)}
-          className="p-2 bg-blue-500 text-white rounded-md"
-        >
-          Generar Horario para Asignaturas Seleccionadas
-        </button>
+      {/* Footer con créditos */}
+      <div className="text-center mt-8">
+        <p className="text-sm font-semibold">
+          Creado por Joaquín Riquelme, 2024
+        </p>
       </div>
-
-      {/* Recomendaciones de horario */}
-      {showSchedule && (
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Recomendaciones de Horario</h2>
-          {generateSchedule().subjects.map((sub) => (
-            <div key={sub.code} className="mb-4">
-              <p className="font-semibold">{sub.name} ({sub.hours} horas/semana)</p>
-            </div>
-          ))}
-          <p className="font-bold">Total de horas por semana: {generateSchedule().totalHours}</p>
-        </div>
-      )}
     </div>
   );
 };
