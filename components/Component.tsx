@@ -23,12 +23,12 @@ const subjects: Subject[] = [
   { code: "25012", name: "Electromagnetismo II", semester: 4, description: "Conceptos avanzados de electromagnetismo", prerequisites: ["25007", "25008"], hours: 5 },
   { code: "25013", name: "Métodos Matemáticos para la Física I", semester: 4, description: "Métodos matemáticos aplicados a la física", prerequisites: ["25008", "25010"], hours: 4 },
   { code: "25014", name: "Electrónica", semester: 4, description: "Introducción a la electrónica", prerequisites: ["25007"], hours: 4 },
-  { code: "25016", name: "Óptica", semester: 5, description: "Fundamentos de la óptica", prerequisites: ["25007"], hours: 4 },
+  { code: "25015", name: "Mecánica Clásica", semester: 4, description: "Dinámica integral, mecánica lagrangiana y hamiltoniana", prerequisites: ["25001"], hours: 6 ],
+  { code: "25016", name: "Óptica", semester: 5, description: "Fundamentos de la óptica", prerequisites: ["25012"], hours: 4 },
   { code: "25017", name: "Métodos Matemáticos para la Física II", semester: 5, description: "Métodos avanzados matemáticos", prerequisites: ["25013"], hours: 4 },
-  { code: "25018", name: "Termodinámica", semester: 5, description: "Conceptos fundamentales de termodinámica", prerequisites: ["25007"], hours: 4 },
+  { code: "25018", name: "Termodinámica", semester: 5, description: "Conceptos fundamentales de termodinámica", prerequisites: ["25002"], hours: 4 },
   { code: "25021", name: "Física Moderna", semester: 6, description: "Conceptos modernos en física", prerequisites: ["25012"], hours: 4 },
   { code: "25022", name: "Mecánica de Fluidos", semester: 6, description: "Principios básicos de la mecánica de fluidos", prerequisites: ["25012"], hours: 4 },
-  { code: "25023", name: "Física Experimental VI", semester: 6, description: "Laboratorio avanzado en física experimental", prerequisites: ["25012"], hours: 6 },
   { code: "25026", name: "Mecánica Cuántica", semester: 7, description: "Fundamentos de la mecánica cuántica", prerequisites: ["25012"], hours: 5 },
   { code: "25027", name: "Mecánica Estadística", semester: 7, description: "Introducción a la mecánica estadística", prerequisites: ["25012"], hours: 5 },
   { code: "25028", name: "Cálculo Numérico", semester: 7, description: "Métodos numéricos aplicados", prerequisites: ["25010"], hours: 4 },
@@ -50,8 +50,13 @@ const subjects: Subject[] = [
   
   // Métodos Computacionales
   { code: "25054", name: "Métodos Computacionales para la Física I", semester: 2, description: "Introducción a los métodos computacionales", prerequisites: [], hours: 4 },
-  { code: "25055", name: "Métodos Computacionales para la Física II", semester: 6, description: "Métodos computacionales avanzados", prerequisites: ["25054"], hours: 4 },
-  { code: "25056", name: "Métodos Computacionales y Estadísticos III", semester: 7, description: "Métodos computacionales y estadísticos avanzados", prerequisites: ["25055"], hours: 4 },
+  { code: "25055", name: "Métodos Computacionales para la Física II", semester: 3, description: "Métodos computacionales avanzados", prerequisites: ["25054"], hours: 4 },
+  { code: "25056", name: "Métodos Computacionales y Estadísticos III", semester: 4, description: "Métodos computacionales y estadísticos avanzados", prerequisites: ["25055"], hours: 4 },
+
+  // Física experimental
+  { code: "25023", name: "Física Experimental III", semester: 3, description: "Laboratorio avanzado en física experimental", prerequisites: ["25053"], hours: 6 },
+  { code: "25023", name: "Física Experimental IV", semester: 5, description: "Laboratorio avanzado en física experimental", prerequisites: ["25012"], hours:  },
+  { code: "25023", name: "Física Experimental V", semester: 5, description: "Laboratorio avanzado en física experimental", prerequisites: ["25012"], hours: 6 },
 ];
 
 const LOCAL_STORAGE_KEY = 'approvedSubjects';
