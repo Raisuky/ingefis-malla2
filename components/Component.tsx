@@ -123,22 +123,22 @@ const Curriculum: React.FC = () => {
     const isLocked = subject.prerequisites && subject.prerequisites.some(prereq => !approvedSubjects.includes(prereq));
     const isSelected = selectedSubjects.includes(subject.code);
 
-    // Aplicar colores explícitamente tanto en modo claro como oscuro
+    // Colores suaves para modo claro y colores intensos para modo oscuro
     const backgroundClass = isApproved
-      ? 'bg-green-100 dark:bg-green-700' // Verde para aprobadas
+      ? 'bg-green-50 dark:bg-green-700' // Verde suave para aprobadas (modo claro), intenso en modo oscuro
       : isUnlocked
-      ? 'bg-blue-100 dark:bg-blue-700' // Azul para desbloqueadas
+      ? 'bg-blue-50 dark:bg-blue-700' // Azul suave para desbloqueadas (modo claro), intenso en modo oscuro
       : isLocked
-      ? 'bg-red-100 dark:bg-red-700' // Rojo para bloqueadas
-      : 'bg-gray-100 dark:bg-gray-700'; // Gris por defecto
+      ? 'bg-red-50 dark:bg-red-700' // Rojo suave para bloqueadas (modo claro), intenso en modo oscuro
+      : 'bg-gray-50 dark:bg-gray-700'; // Gris suave por defecto (modo claro), intenso en modo oscuro
 
     const hoverClass = isApproved
-      ? 'hover:bg-green-200 dark:hover:bg-green-600'
+      ? 'hover:bg-green-100 dark:hover:bg-green-600'
       : isUnlocked
-      ? 'hover:bg-blue-200 dark:hover:bg-blue-600'
+      ? 'hover:bg-blue-100 dark:hover:bg-blue-600'
       : isLocked
-      ? 'hover:bg-red-200 dark:hover:bg-red-600'
-      : 'hover:bg-gray-200 dark:hover:bg-gray-600';
+      ? 'hover:bg-red-100 dark:hover:bg-red-600'
+      : 'hover:bg-gray-100 dark:hover:bg-gray-600';
 
     return (
       <div
