@@ -1,18 +1,13 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx}',  // Si usas Next.js
+    './components/**/*.{js,ts,jsx,tsx}',  // Si tienes componentes
+    './app/**/*.{js,ts,jsx,tsx}',  // Si usas la nueva carpeta 'app' de Next.js
+    './src/**/*.{js,ts,jsx,tsx}',  // Si los archivos están en src
   ],
   theme: {
     extend: {},
   },
   plugins: [],
-  safelist: [
-    'bg-green-100',
-    'bg-red-100',
-    'bg-blue-100',
-    'hover:bg-green-200',
-    'hover:bg-red-200',
-    'hover:bg-blue-200',
-  ],
 }
