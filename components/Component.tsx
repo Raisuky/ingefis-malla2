@@ -55,7 +55,7 @@ const subjects: Subject[] = [
 
   // Física experimental
   { code: "25023", name: "Física Experimental III", semester: 3, description: "Laboratorio avanzado en física experimental", prerequisites: ["25053"], hours: 6 },
-  { code: "25023", name: "Física Experimental IV", semester: 5, description: "Laboratorio avanzado en física experimental", prerequisites: ["25012"], hours:  },
+  { code: "25023", name: "Física Experimental IV", semester: 5, description: "Laboratorio avanzado en física experimental", prerequisites: ["25012"], hours: 4 },
   { code: "25023", name: "Física Experimental V", semester: 5, description: "Laboratorio avanzado en física experimental", prerequisites: ["25012"], hours: 6 },
 ];
 
