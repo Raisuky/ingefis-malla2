@@ -23,7 +23,7 @@ const subjects: Subject[] = [
   { code: "25012", name: "Electromagnetismo II", semester: 4, description: "Conceptos avanzados de electromagnetismo", prerequisites: ["25007", "25008"], hours: 5 },
   { code: "25013", name: "Métodos Matemáticos para la Física I", semester: 4, description: "Métodos matemáticos aplicados a la física", prerequisites: ["25008", "25010"], hours: 4 },
   { code: "25014", name: "Electrónica", semester: 4, description: "Introducción a la electrónica", prerequisites: ["25007"], hours: 4 },
-  { code: "25015", name: "Mecánica Clásica", semester: 4, description: "Dinámica integral, mecánica lagrangiana y hamiltoniana", prerequisites: ["25001"], hours: 6 ],
+  { code: "25015", name: "Mecánica Clásica", semester: 4, description: "Dinámica integral, mecánica lagrangiana y hamiltoniana", prerequisites: ["25001"], hours: 6 },
   { code: "25016", name: "Óptica", semester: 5, description: "Fundamentos de la óptica", prerequisites: ["25012"], hours: 4 },
   { code: "25017", name: "Métodos Matemáticos para la Física II", semester: 5, description: "Métodos avanzados matemáticos", prerequisites: ["25013"], hours: 4 },
   { code: "25018", name: "Termodinámica", semester: 5, description: "Conceptos fundamentales de termodinámica", prerequisites: ["25002"], hours: 4 },
