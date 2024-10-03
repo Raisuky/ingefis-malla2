@@ -123,18 +123,27 @@ const Curriculum: React.FC = () => {
     const isLocked = subject.prerequisites && subject.prerequisites.some(prereq => !approvedSubjects.includes(prereq));
     const isSelected = selectedSubjects.includes(subject.code);
 
+    // Aplicar colores explícitamente tanto en modo claro como oscuro
+    const backgroundClass = isApproved
+      ? 'bg-green-100 dark:bg-green-700' // Verde para aprobadas
+      : isUnlocked
+      ? 'bg-blue-100 dark:bg-blue-700' // Azul para desbloqueadas
+      : isLocked
+      ? 'bg-red-100 dark:bg-red-700' // Rojo para bloqueadas
+      : 'bg-gray-100 dark:bg-gray-700'; // Gris por defecto
+
+    const hoverClass = isApproved
+      ? 'hover:bg-green-200 dark:hover:bg-green-600'
+      : isUnlocked
+      ? 'hover:bg-blue-200 dark:hover:bg-blue-600'
+      : isLocked
+      ? 'hover:bg-red-200 dark:hover:bg-red-600'
+      : 'hover:bg-gray-200 dark:hover:bg-gray-600';
+
     return (
       <div
         key={subject.code}
-        className={`p-4 rounded-lg shadow-md cursor-pointer transition-transform ${
-          isApproved
-            ? 'bg-green-100 hover:bg-green-200'
-            : isUnlocked
-            ? 'bg-blue-100 hover:bg-blue-200'
-            : isLocked
-            ? 'bg-red-100 hover:bg-red-200'
-            : 'bg-gray-100 hover:bg-gray-200'
-        } ${isSelected ? 'border-4 border-blue-400' : ''} ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}
+        className={`${backgroundClass} ${hoverClass} p-4 rounded-lg shadow-md cursor-pointer transition-transform ${isSelected ? 'border-4 border-blue-400' : ''}`}
         onClick={() => handleSelectSubject(subject.code)} // Seleccionar asignatura para generar horario
         onDoubleClick={() => handleApproveSubject(subject.code)} // Doble clic para marcar aprobada
       >
@@ -145,7 +154,6 @@ const Curriculum: React.FC = () => {
     );
   };
 
-  // Renderizado de los semestres
   const renderSemester = (semester: number) => {
     const semesterSubjects = filteredSubjects.filter(subject => subject.semester === semester);
     return (
