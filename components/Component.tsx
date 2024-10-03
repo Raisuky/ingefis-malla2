@@ -144,32 +144,32 @@ const Curriculum: React.FC = () => {
     const isUnlocked = subject.prerequisites && subject.prerequisites.every(prereq => approvedSubjects.includes(prereq));
     const isLocked = subject.prerequisites && subject.prerequisites.some(prereq => !approvedSubjects.includes(prereq));
     const isSelected = selectedSubjects.includes(subject.code);
-
+  
     // Colores suaves para modo claro y colores intensos para modo oscuro
     const backgroundClass = isApproved
-      ? 'bg-green-50 dark:bg-green-700' // Verde suave para aprobadas (modo claro), intenso en modo oscuro
+      ? "bg-green-50 dark:bg-green-700" // Verde suave para aprobadas (modo claro), intenso en modo oscuro
       : isInProgress
-      ? 'bg-yellow-50 dark:bg-yellow-700' // Amarillo suave para asignaturas en curso
+      ? "bg-yellow-50 dark:bg-yellow-700" // Amarillo suave para asignaturas en curso
       : isUnlocked
-      ? 'bg-blue-50 dark:bg-blue-700' // Azul suave para desbloqueadas (modo claro), intenso en modo oscuro
+      ? "bg-blue-50 dark:bg-blue-700" // Azul suave para desbloqueadas (modo claro), intenso en modo oscuro
       : isLocked
-      ? 'bg-red-50 dark:bg-red-700' // Rojo suave para bloqueadas (modo claro), intenso en modo oscuro
-      : 'bg-gray-50 dark:bg-gray-700'; // Gris suave por defecto (modo claro), intenso en modo oscuro
-
+      ? "bg-red-50 dark:bg-red-700" // Rojo suave para bloqueadas (modo claro), intenso en modo oscuro
+      : "bg-gray-50 dark:bg-gray-700"; // Gris suave por defecto (modo claro), intenso en modo oscuro
+  
     const hoverClass = isApproved
-      ? 'hover:bg-green-200 dark:hover:bg-green-700'  // Darker green
+      ? "hover:bg-green-200 dark:hover:bg-green-700"  // Darker green
       : isInProgress
-      ? 'hover:bg-yellow-200 dark:hover:bg-yellow-600' // Darker yellow
+      ? "hover:bg-yellow-200 dark:hover:bg-yellow-600" // Darker yellow
       : isUnlocked
-      ? 'hover:bg-blue-200 dark:hover:bg-blue-700'    // Darker blue
+      ? "hover:bg-blue-200 dark:hover:bg-blue-700"    // Darker blue
       : isLocked
-      ? 'hover:bg-red-200 dark:hover:bg-red-700'      // Darker red
-      : 'hover:bg-gray-200 dark:hover:bg-gray-700';   // Darker gray
-
+      ? "hover:bg-red-200 dark:hover:bg-red-700"      // Darker red
+      : "hover:bg-gray-200 dark:hover:bg-gray-700";   // Darker gray
+  
     return (
       <div
         key={subject.code}
-        className={`${backgroundClass} ${hoverClass} p-4 rounded-lg shadow-md cursor-pointer transition-transform ${isSelected ? 'border-4 border-blue-400' : ''}`}
+        className={`${backgroundClass} ${hoverClass} p-4 rounded-lg shadow-md cursor-pointer transition-transform ${isSelected ? "border-4 border-blue-400" : ""}`}
         onClick={() => handleSelectSubject(subject.code)} // Seleccionar asignatura para generar horario
         onDoubleClick={() => handleApproveSubject(subject.code)} // Doble clic para marcar aprobada
         onContextMenu={(e) => { // Click derecho para marcar en curso
@@ -177,13 +177,15 @@ const Curriculum: React.FC = () => {
           handleInProgressSubject(subject.code);
         }}
       >
-        <h3 className="font-semibold text-lg">{subject.name}</h3>
-        <p className="text-sm">Código: {subject.code}</p>
-        <p className="text-sm">Horas por semana: {subject.hours}</p>
+        <>
+          <h3 className="font-semibold text-lg">{subject.name}</h3>
+          <p className="text-sm">Código: {subject.code}</p>
+          <p className="text-sm">Horas por semana: {subject.hours}</p>
+        </>
       </div>
     );
   };
-
+  
   const renderSemester = (semester: number) => {
     const semesterSubjects = filteredSubjects.filter(subject => subject.semester === semester);
     return (
