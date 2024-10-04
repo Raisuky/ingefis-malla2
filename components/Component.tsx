@@ -240,9 +240,9 @@ const Curriculum: React.FC = () => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') handleClick(e as any);
-          if (e.key === ' ') handleDoubleClick(e as any);
+        onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
+          if (e.key === 'Enter') handleClick(e);
+          if (e.key === ' ') handleDoubleClick(e);
         }}
       >
         <h3 style={{ fontWeight: 600, fontSize: '1.125rem' }}>{subject.name}</h3>
