@@ -267,9 +267,9 @@ const Curriculum: React.FC = () => {
         onMouseLeave={handleMouseLeave}
         tabIndex={0}
         onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
-          if (e.key === 'Enter') handleClick(e);
-          if (e.key === ' ') handleDoubleClick(e);
-        }}
+          if (e.key === 'Enter') handleSelectSubject(subject.code);
+          if (e.key === ' ') handleApproveSubject(subject.code);
+        }}        
       >
         <h3 style={{ fontWeight: 600, fontSize: '1.125rem' }}>{subject.name}</h3>
         <p style={{ fontSize: '0.875rem' }}>Código: {subject.code}</p>
